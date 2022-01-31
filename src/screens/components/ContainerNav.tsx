@@ -1,7 +1,6 @@
 import styled from "@emotion/native"
 import React from "react"
-import { Image, StatusBar, Text } from "react-native"
-import { balls } from "./balls"
+import { Image } from "react-native"
 
 export const NavContainer: React.FC = styled.View`
     display: flex;
@@ -60,4 +59,37 @@ export const Label: React.FC = styled.Text`
     color: #384f7d;
     text-transform: uppercase;
     margin: 30px 0;
+`
+
+export const CardBook: React.FC = styled.TouchableOpacity`
+    flex-direction: row;
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 4px 12px 25px rgba(71, 55, 255, 0.08);
+`
+
+export const CardBookLogo: React.FC = styled.View`
+    width: 70px;
+    height: 110px;
+    margin-right: 30px;
+`
+export const CardBookContainer: React.FC = styled.View`
+    flex-direcrion: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 50%;
+`
+
+export const CardBookAuthor: React.FC = styled.Text`
+    font-size: 14px;
+    color: #384F7DCC;
+    margin-top: 5px;  
+` 
+
+export const CardBookTitle: React.FC = styled.Text`
+    font-size: 18px;
+    color: #384F7D;
+    font-weight: bold;
 `

@@ -1,16 +1,30 @@
 import React, { useEffect } from "react"
-import { View, StatusBar, SafeAreaView, FlatList, Text, TouchableOpacity } from "react-native"
-import { SearchInput, SearchSVG, NavContainer, NavHeader, NavHeaderTitle, Label } from "../components/ContainerNav"
+import { View, StatusBar, SafeAreaView, FlatList } from "react-native"
+import { 
+  SearchInput, 
+  SearchSVG, 
+  NavContainer, 
+  NavHeader, 
+  NavHeaderTitle, 
+  Label, 
+  CardBook,
+  CardBookLogo,
+  CardBookTitle,
+  CardBookContainer,
+  CardBookAuthor,
+} from "../components/ContainerNav"
 import { balls } from "../components/balls"
 import IconAnt from "react-native-vector-icons/AntDesign"
 import { useDispatch, useSelector } from "react-redux"
 import { setBooks } from "../../store/reducers/booksSlice"
 import { RootState } from "../../store/store"
+import { Rating, AirbnbRating } from 'react-native-ratings';
 
 export const HomeScreen: React.FC = () => {
     let allBooks = useSelector((state: RootState) => state.books.allBooks)
     const dispatch = useDispatch()
-    const getBooksFromApiAsync = async () => {        
+    const getBooksFromApiAsync = async () => {
+      if(allBooks.length == 0) {
         try {
           const response = await fetch(
             'https://run.mocky.io/v3/9a805462-0ba3-43c6-95bb-3aec0aadc7cd'
@@ -20,10 +34,11 @@ export const HomeScreen: React.FC = () => {
         } catch (error) {
           console.error(error)
         }
+      }               
     };
     
     useEffect(()=>{
-        getBooksFromApiAsync()          
+      getBooksFromApiAsync() 
     },[])
 
     const checkTitle = (id: any) => {
@@ -46,11 +61,22 @@ export const HomeScreen: React.FC = () => {
                 <FlatList
                     data={allBooks}
                     renderItem={({ item, index, separators }) => (
-                      <TouchableOpacity
+                      <CardBook
                         key={item.id}
                         onPress={() => checkTitle(item.id)}
-                      ><Text>{item.titleBook}</Text>
-                      </TouchableOpacity>  
+                      >                        
+                        <CardBookLogo style={{backgroundColor: item.logoBook}}></CardBookLogo>
+                        <CardBookContainer>                          
+                          <CardBookTitle>{item.titleBook}</CardBookTitle>
+                          <CardBookAuthor>{item.firstNameAuthor} {item.lastNameAuthor}</CardBookAuthor>
+                          <AirbnbRating
+                            reviewSize={0}                          
+                            count={5}
+                            defaultRating={item.ratingBook}
+                            size={16}
+                          />                  
+                        </CardBookContainer>                                           
+                      </CardBook>  
                     )}
                 />                               
             </SafeAreaView>            

@@ -4,7 +4,7 @@ import { StatusBar } from "react-native"
 import { useDispatch } from "react-redux"
 import { authSignIn, setUsers } from "../store/reducers/authSlice"
 import { balls } from "./components/balls"
-import { Container, AuthTitle, InputTitle, TextBtn } from "./components/ContainerComponents"
+import { Container, AuthTitle, InputTitle, TextBtn } from "./components/ContainerAuth"
 
 export const AuthScreen: React.FC = () => {
     let [email, setEmail] = useState('')
