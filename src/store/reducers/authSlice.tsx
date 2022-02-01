@@ -7,7 +7,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  value: false,
+  value: true,
   users: []
 }
 

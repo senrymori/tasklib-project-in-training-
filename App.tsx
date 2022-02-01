@@ -12,7 +12,7 @@ const StartApp = () => {
 const App = () => {  
   return (
     <Provider store={store}>
-      <StartApp></StartApp>
+      <StartApp></StartApp>    
     </Provider>      
   );
 };

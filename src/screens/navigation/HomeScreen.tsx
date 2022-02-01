@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import { View, StatusBar, SafeAreaView, FlatList } from "react-native"
+import React, { useEffect, useState } from "react"
+import { View, StatusBar, SafeAreaView, FlatList, RefreshControl } from "react-native"
 import { 
   SearchInput, 
   SearchSVG, 
@@ -16,11 +16,13 @@ import {
 import { balls } from "../components/balls"
 import IconAnt from "react-native-vector-icons/AntDesign"
 import { useDispatch, useSelector } from "react-redux"
-import { setBooks } from "../../store/reducers/booksSlice"
+import { refreshBooks, setBooks } from "../../store/reducers/booksSlice"
 import { RootState } from "../../store/store"
-import { Rating, AirbnbRating } from 'react-native-ratings';
+import { AirbnbRating } from 'react-native-ratings';
 
 export const HomeScreen: React.FC = () => {
+    
+    let [refreshing, setRefreshing] = useState(false)
     let allBooks = useSelector((state: RootState) => state.books.allBooks)
     const dispatch = useDispatch()
     const getBooksFromApiAsync = async () => {
@@ -42,8 +44,12 @@ export const HomeScreen: React.FC = () => {
     },[])
 
     const checkTitle = (id: any) => {
-        console.log(id)
+        dispatch(refreshBooks({}))
     }
+    function onRefresh(): void {
+      console.log('checl');
+      setRefreshing(false);
+    } 
 
     return (
         <NavContainer>
@@ -59,11 +65,14 @@ export const HomeScreen: React.FC = () => {
             <Label>Results</Label>
             <SafeAreaView>
                 <FlatList
+                    style={{marginBottom: 220}}
                     data={allBooks}
                     renderItem={({ item, index, separators }) => (
                       <CardBook
                         key={item.id}
                         onPress={() => checkTitle(item.id)}
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}                
                       >                        
                         <CardBookLogo style={{backgroundColor: item.logoBook}}></CardBookLogo>
                         <CardBookContainer>                          
