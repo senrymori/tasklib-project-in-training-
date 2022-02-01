@@ -9,18 +9,18 @@ import {
   Label, 
   CardBook,
   CardBookLogo,
-  CardBookTitle,
+  BookTitle,
   CardBookContainer,
   CardBookAuthor,
 } from "../components/ContainerNav"
 import { balls } from "../components/balls"
 import IconAnt from "react-native-vector-icons/AntDesign"
 import { useDispatch, useSelector } from "react-redux"
-import { refreshBooks, setBooks } from "../../store/reducers/booksSlice"
+import { refreshBooks, setBooks, setOpenBook } from "../../store/reducers/booksSlice"
 import { RootState } from "../../store/store"
 import { AirbnbRating } from 'react-native-ratings';
 
-export const HomeScreen: React.FC = () => {
+export const HomeScreen: React.FC = ({ navigation }) => {
     
     let [refreshing, setRefreshing] = useState(false)
     let allBooks = useSelector((state: RootState) => state.books.allBooks)
@@ -43,11 +43,12 @@ export const HomeScreen: React.FC = () => {
       getBooksFromApiAsync() 
     },[])
 
-    const checkTitle = (id: any) => {
-        dispatch(refreshBooks({}))
+    const openBook = (book: []) => {
+      dispatch(setOpenBook(book))        
+      navigation.navigate('Book')      
     }
-    function onRefresh(): void {
-      console.log('checl');
+    const onRefresh = () => {
+      dispatch(refreshBooks({}))
       setRefreshing(false);
     } 
 
@@ -56,7 +57,7 @@ export const HomeScreen: React.FC = () => {
             {balls.NavBall}
             <StatusBar barStyle="light-content" backgroundColor="#D45E5E"></StatusBar>
             <NavHeader>
-                <NavHeaderTitle>Home</NavHeaderTitle>
+                <NavHeaderTitle>Books</NavHeaderTitle>
             </NavHeader>
             <View style={{position: 'relative'}}>
                 <SearchInput placeholder="Search"></SearchInput> 
@@ -67,16 +68,17 @@ export const HomeScreen: React.FC = () => {
                 <FlatList
                     style={{marginBottom: 220}}
                     data={allBooks}
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}  
                     renderItem={({ item, index, separators }) => (
                       <CardBook
                         key={item.id}
-                        onPress={() => checkTitle(item.id)}
-                        refreshing={refreshing}
-                        onRefresh={onRefresh}                
+                        onPress={() => openBook(item)}                     
+                                      
                       >                        
                         <CardBookLogo style={{backgroundColor: item.logoBook}}></CardBookLogo>
                         <CardBookContainer>                          
-                          <CardBookTitle>{item.titleBook}</CardBookTitle>
+                          <BookTitle>{item.titleBook}</BookTitle>
                           <CardBookAuthor>{item.firstNameAuthor} {item.lastNameAuthor}</CardBookAuthor>
                           <AirbnbRating
                             reviewSize={0}                          

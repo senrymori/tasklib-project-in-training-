@@ -3,7 +3,7 @@ import React from "react"
 import { Image } from "react-native"
 
 export const NavContainer: React.FC = styled.View`
-    display: flex;
+    display: flex;    
     flex: 1;
     background-color: #EEECFF;
     padding: 0 30px;
@@ -28,15 +28,6 @@ export const ArrowBtn: React.FC = () => {
     return <Image source={require('../../../assets/img/arrow.png')} />
 }
 
-export const BackBtn: React.FC = (props) => {
-    console.log(props);
-    
-    return (
-        <ContainerBtn>
-            <ArrowBtn />            
-        </ContainerBtn>        
-    )
-}
 export const SearchSVG: React.FC = styled.View`
     position: absolute;
     top: 58%;
@@ -88,8 +79,34 @@ export const CardBookAuthor: React.FC = styled.Text`
     margin-top: 5px;  
 ` 
 
-export const CardBookTitle: React.FC = styled.Text`
-    font-size: 18px;
+export const BookTitle: React.FC = styled.Text`
+    font-size: 20px;
     color: #384F7D;
     font-weight: bold;
+`
+export const BookContainer: React.FC = styled.View`
+    flex-direction: row;
+    margin-top: 30px;
+`
+export const BookLogo: React.FC = styled.View`
+    height: 200px;
+    width: 130px;
+    border-radius: 8px;
+    margin-right: 20px;
+`
+export const BookTextContainer: React.FC = styled.View`
+    width: 60%;
+    flex-direction: column;
+    justify-content: center;
+`
+export const BookAuthor: React.FC = styled.Text`
+    font-size: 16px;
+    color: #384F7DCC;
+    margin-bottom: 20px;
+`
+export const BookDescription: React.FC = styled.Text`
+    font-size: 14px;
+    line-height: 22px;
+    height: 80px;
+    margin-top: 30px;
 `

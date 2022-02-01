@@ -20,7 +20,7 @@ const SmallBall: React.FC = styled.View`
 
 const NavBall: React.FC = styled.View`
     position: absolute;
-    top: -12%;
+    top: -22%;
     left: -59%;
 `
 

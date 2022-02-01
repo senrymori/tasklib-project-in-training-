@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 interface BookState {
-    allBooks: []
+    allBooks: [],
+    book: []
 }
 
 const initialState: BookState = {
-    allBooks: []
+    allBooks: [],
+    book: []
 }
 
 export const booksSlice = createSlice({
@@ -17,10 +19,13 @@ reducers: {
     },
     refreshBooks: (state, action) => {
         state.allBooks.sort(()=>Math.random()-0.5)
+    },
+    setOpenBook: (state, action) => {
+        state.book = action.payload
     }
 },
 })
 
-export const { setBooks, refreshBooks } = booksSlice.actions
+export const { setBooks, refreshBooks, setOpenBook } = booksSlice.actions
 
 export default booksSlice.reducer
