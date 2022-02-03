@@ -102,12 +102,7 @@ export const SettingsScreen: React.FC = ({navigation}) => {
                 }}>
                 <SettingsTextContainer>
                     <SettingsText style={{ color: '#D45E5E' }}>Logout</SettingsText>                    
-                </SettingsTextContainer>
-                <IconMI 
-                    name="arrow-forward-ios"
-                    size={15}
-                    color="#445984A6"
-                />                 
+                </SettingsTextContainer>             
             </SettingsNav>
         </NavContainer>
     )
