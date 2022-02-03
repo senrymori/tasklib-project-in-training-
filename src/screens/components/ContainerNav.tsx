@@ -110,3 +110,19 @@ export const BookDescription: React.FC = styled.Text`
     height: 80px;
     margin-top: 30px;
 `
+export const SettingsNav: React.FC = styled.TouchableOpacity`
+    flex-direction: row;
+    padding: 18px 30px;
+    justify-content: space-between;
+`
+
+export const SettingsText: React.FC = styled.Text`
+    font-size: 16px;
+    color: #445984A6;
+    margin-left: 16px;
+`
+
+export const SettingsTextContainer: React.FC = styled.View`
+    flex-direction: row;
+    align-items: center;
+`
